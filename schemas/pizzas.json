@@ -1,0 +1,67 @@
+{
+    "type": "object",
+    "title": "Pizzas schema",
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "required": ["id", "name"],
+    "properties": {
+        "id": {
+            "type": ["integer", "null"],
+            "_db_settings": {
+                "type": "id_field",
+                "required": true,
+                "primary_key": true
+            }
+        },
+        "name": {
+            "type": "string",
+            "_db_settings": {
+                "type": "string",
+                "required": true
+            }
+        },
+        "description": {
+            "type": ["string", "null"],
+            "_db_settings": {
+                "type": "text"
+            }
+        },
+        "toppings": {
+            "required": false,
+            "type": "relationship",
+            "args": {
+                "document": "Topping",
+                "ondelete": "NULLIFY",
+                "backref_name": "pizza",
+                "backref_ondelete": "NULLIFY"
+            }
+        },
+        "cheeses": {
+            "required": false,
+            "type": "relationship",
+            "args": {
+                "document": "Cheese",
+                "ondelete": "NULLIFY",
+                "backref_name": "pizza",
+                "backref_ondelete": "NULLIFY"
+            }
+        },
+        "sauce_id": {
+            "required": false,
+            "type": "foreign_key",
+            "args": {
+                "ref_document": "Sauce",
+                "ref_column": "sauce.id",
+                "ref_column_type": "id_field"
+            }
+        },
+        "crust_id": {
+            "required": true,
+            "type": "foreign_key",
+            "args": {
+                "ref_document": "Crust",
+                "ref_column": "crust.id",
+                "ref_column_type": "id_field"
+            }
+        }
+    }
+}

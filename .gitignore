@@ -1,0 +1,6 @@
+venv
+*.swp
+*.swo
+*.pyo
+*.pyc
+*.egg*
